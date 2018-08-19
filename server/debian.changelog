@@ -1,0 +1,143 @@
+provisioning-server (1.12.4) unstable; urgency=low
+
+  * Update SwReality to populate last_login table
+
+ -- Kurt Adam <kadam@appnexus.com>  Tue, 08 May 2018 16:06:00 -0500
+
+provisioning-server (1.12.3) unstable; urgency=low
+
+  * Updated snapshot handling to ignore duplicate tags
+
+ -- Kurt Adam <kadam@appnexus.com>  Mon, 22 Jan 2018 10:19:00 -0400
+
+provisioning-server (1.10.31) unstable; urgency=low
+
+  * Updated hypervisor handling to trigger on any run, not just package updates
+
+ -- Kurt Adam <kadam@appnexus.com>  Tue, 29 Aug 2017 10:28:00 -0400
+
+provisioning-server (1.10.30) unstable; urgency=low
+
+  * Added hypervisor handling to SwReality
+
+ -- Kurt Adam <kadam@appnexus.com>  Tue, 29 Aug 2017 08:38:00 -0400
+
+provisioning-server (1.10.23) unstable; urgency=low
+
+  * Fixed borked changelog
+
+ -- Kurt Adam <kadam@appnexus.com>  Mon, 27 Mar 2017 10:53:00 -0400
+
+provisioning-server (1.10.22) unstable; urgency=low
+
+  * Fixed discrepancy creation for DB failures, discrepancy handling for snapshots, and failures of submission of unversioned JSON.  Added discrepancy for devices needing reboot
+
+ -- Kurt Adam <kadam@appnexus.com>  Mon, 27 Mar 2017 09:28:31 -0400
+
+provisioning-server (1.10.21) unstable; urgency=low
+
+  * Fixed bug in post-processing of swreality data when dealing with older data formats
+
+ -- Kurt Adam <kadam@appnexus.com>  Wed, 11 Jan 2017 17:11:00 -0500
+
+provisioning-server (1.10.20) unstable; urgency=low
+
+  * Fix issue with provisioning boxes not correctly detecting and quieting servers that have previously been provisioned
+
+ -- Matt Ragan <mdr@appnexus.com>  Sat, 07 Oct 2016 13:26:25 -0400
+
+provisioning-server (1.10.19) unstable; urgency=low
+
+  * Updated SwReality to handle file exceptions itself and to deal with api_version 1.2
+
+ -- Kurt Adam <kadam@appnexus.com>  Sat, 20 Aug 2016 19:29:00 -0400
+
+provisioning-server (1.10.18) unstable; urgency=low
+
+  * Have duplicate requests not error, but return as if they succeeded
+
+ -- Matthew Ragan <mdr@appnexus.com>  Mon, 08 Aug 2016 10:00:00 -0400
+
+provisioning-server (1.10.17) unstable; urgency=low
+
+  * Fix puppet and creds timestamp insertion
+
+ -- Kurt Adam <kadam@appnexus.com>  Thu, 07 Jul 2016 12:48:00 -0400
+
+provisioning-server (1.10.16) unstable; urgency=low
+
+  * Fix puppet and creds timestamp insertion
+
+ -- Kurt Adam <kadam@appnexus.com>  Wed, 22 Jun 2016 17:46:00 -0400
+
+provisioning-server (1.10.15) unstable; urgency=low
+
+  * Update last puppet and creds run timestamps and only do application validation when application matches Maestro
+
+ -- Kurt Adam <kadam@appnexus.com>  Mon, 20 Jun 2016 16:51:00 -0400
+
+provisioning-server (1.10.14) unstable; urgency=low
+
+  * Update discrepancy deletion to validate necessity in advance
+
+ -- Kurt Adam <kadam@appnexus.com>  Mon, 20 Jun 2016 16:51:00 -0400
+
+provisioning-server (1.10.13) unstable; urgency=low
+
+  * Fixed JSON storing code to work when device_id is known. Delete previous maestro package comparison discrepancies, when versions match
+
+ -- Kurt Adam <kadam@appnexus.com>  Mon, 20 Jun 2016 16:51:00 -0400
+
+provisioning-server (1.10.12) unstable; urgency=low
+
+  * Fixed version check override for storminator
+
+ -- Kurt Adam <kadam@appnexus.com>  Fri, 17 Jun 2016 11:30:00 -0400
+
+provisioning-server (1.10.11) unstable; urgency=low
+
+  * Updated version checking upon report submission to better handle release madness
+
+ -- Kurt Adam <kadam@appnexus.com>  Fri, 17 Jun 2016 11:09:00 -0400
+
+provisioning-server (1.10.10) unstable; urgency=low
+
+  * Tweaks for differences in dealing with version checking between different packages
+
+ -- Kurt Adam <kadam@appnexus.com>  Thu, 16 Jun 2016 17:32:00 -0400
+
+provisioning-server (1.10.9) unstable; urgency=low
+
+  * Added workaround for -1 versioning differences for package checks
+
+ -- Kurt Adam <kadam@appnexus.com>  Thu, 16 Jun 2016 09:21:00 -0400
+
+provisioning-server (1.10.8) unstable; urgency=low
+
+  * Expanded list of maestro packages to verify upon report submission
+
+ -- Kurt Adam <kadam@appnexus.com>  Thu, 16 Jun 2016 08:46:00 -0400
+
+provisioning-server (1.10.6) unstable; urgency=low
+
+  * Update SwReality to deal with audit reports and track timestamps for duplicate json submissions (instead of inserting all submissions)
+
+ -- Kurt Adam <kadam@appnexus.com>  Mon, 13 Jun 2016 10:25:00 -0400
+
+provisioning-server (1.10.5) unstable; urgency=low
+
+  * Fix for lv tables that changed out from under things
+
+ -- Matthew Ragan <mdr@appnexus.com>  Wed, 09 Dec 2015 13:56:24 -0500
+
+provisioning-server (1.10.1) unstable; urgency=low
+
+  * Split out things into more modules
+
+ -- Matthew Ragan <mdr@appnexus.com>  Tue, 06 Oct 2015 16:49:53 -0500
+
+provisioning-server (1.6) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Matthew Ragan <mdr@appnexus.com>  Tue, 21 Jul 2015 17:52:43 +0000

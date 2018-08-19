@@ -1,0 +1,12 @@
+Source: provisioning-server
+Section: System/Management
+Priority: optional
+Maintainer: CSI Team <csi@appnexus.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+Version: 1.10.19
+
+Package: provisioning-server
+Architecture: all
+Depends: apache2-bin, libapache2-mod-perl2, libapache2-mod-auth-kerb, libdata-compare-perl, libdbd-pg-perl, libapache-dbi-perl, postgresql-client (>= 9.3), jazzhands-perl-common, perl-jazzhands-dbi, perl-jazzhands-appauthal, libdbi-perl, libjson-xs-perl, libjson-perl, libnet-stomp-perl
+Description: Apache module for automated device provisioning, hardware and software reality reporting backend

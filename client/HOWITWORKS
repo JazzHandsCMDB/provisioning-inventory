@@ -1,0 +1,79 @@
+NOTE: some of this functionality is currently broken due to changes to the
+      debian-install things, and the new fixes have not been completely
+	  implemented, specifically the whole bits around completing the
+	  separation of the first and second stage bits.  YMMV.
+
+  - server boots up using provisioning PXE image using dynamically-assigned
+	address via DHCP
+
+  - /usr/jazzhands/provision/fetch-stage2 runs which brings up networking
+    and fetches the provisioning scripts from the URL passed through
+	either the JazzHands.provisioning-stage2-url DHCP option (see below) or the
+	jazzhands-provisioning-stage2-url boot option
+
+  - The provisioning scripts and all of their support bits are extracted
+    into /tmp/provisioning and /tmp/provisioning/do-provisioning is
+	executed
+
+  - do-provisioning gathers information about the device and sends it via
+    JSON request to the URL sent via the JazzHands.provisioning-url DHCP
+	option, the jazzhands-provisioning-url boot option, or it will post
+	to https://provisioning/provision in the absence of either.
+
+	The posted information includes:
+
+	- system information including vendor, model, serial number,
+	  and UUID (hostid)
+	- BIOS version
+	- CPU information including vendor, model, speed, cores
+	- Memory information, including total number of memory slots, 
+	  total amount of memory, and vendor, speed, size, type and serial number
+	  of individual memory components installed in specific slots
+	- BMC information, including MAC, version, and IP address, if any
+	- Disk controller and disk information with model, size, and type
+	  (currently only disks attached to LSI MegaRAID controllers)
+	- Network interface details, including OS interface name, model, MAC,
+	  PCI slot, and, if available, LLDP information about the device to which
+	  the port is connected
+
+	*NOTE* Most of the posted information is currently ignored by the
+	provisioning backend, but this is slowly being remedied
+	
+  - The backend provisioning module takes the information passed to it and
+  	attempts to find the system in the database.  Currently, if the system is
+	found (that is, a device exists with a duplicate MAC address, serial number,
+	or hostid is found in the database, or a system that has a duplicate
+	BMC MAC address), hands are wiped on pants and a success is returned to
+	the client without anything else happening.  Note: if components are
+	located that are not currently associated with a device, those components
+	are attached to the new device.
+
+  - If the host is not found, then a lookup is made against information
+    stored in the device_provisioning.component_type_to_device_type
+	table to map a given set of component hardware to a logical device_type
+	and hostname template.  If a hostname template is not given, a device_name
+	is generated based on the top-level component model name, although this
+	can be overwritten with a global property.
+
+	Also, a lookup is made against the
+	device_provisioning.device_type_rack_location table to attempt to map from
+	a (device_type, site_code, switch_type, port) tuple to the rack U that
+	the device is installed in.  If this is not determined, the device will be
+	inserted into the rack with a NULL rack U, which will need to be corrected
+	later manually.
+
+  - The device, component, rack_location, and network slot information
+    is inserted for the server and its BMC, and inter_component_connection
+    entries for the server are tied to the associated ports on the switch
+	for anything that could be determined via LLDP.  Additionally, the server
+	device is inserted into the 'server' device collection of type
+	'device-function', an the BMC is inserted into the 'BMC' device collection
+	of type 'device-function'
+
+  -	An IP address or DNS record for the BMC is created, but one for the server
+	*is not* created at this time, since the provisioning system does not
+	currently know where the ultimate destination network of the server is.
+
+  - The BMC device is set up in the device_management_controller table for
+    the server as type 'bmc'
+
